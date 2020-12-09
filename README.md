@@ -13,6 +13,6 @@ svm_sk.predict(X_test)
 ```
 
 ## Reference
-[a link](https://towardsdatascience.com/svm-implementation-from-scratch-python-2db2fc52e5c2#72a3
+[SVM from scratch](https://towardsdatascience.com/svm-implementation-from-scratch-python-2db2fc52e5c2#72a3
 )
 
