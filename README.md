@@ -1,4 +1,4 @@
-# Machine Learning algorithms from scrath
+# Machine Learning algorithms from scratch
 - # SVM using stochastic gradient descent
 - # K- nearest neighbours
 
@@ -35,5 +35,5 @@ y_predict = clf.knn(X_test)
 - [SVM from scratch](https://towardsdatascience.com/svm-implementation-from-scratch-python-2db2fc52e5c2#72a3
 )
 
-- [KNN ](https://towardsdatascience.com/machine-learning-basics-with-the-k-nearest-neighbors-algorithm-6a6e71d01761))
+- [KNN ](https://towardsdatascience.com/machine-learning-basics-with-the-k-nearest-neighbors-algorithm-6a6e71d01761)
     -- [choosing K value for KNN](https://discuss.analyticsvidhya.com/t/how-to-choose-the-value-of-k-in-knn-algorithm/2606/5)
