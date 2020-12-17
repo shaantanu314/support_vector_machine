@@ -24,27 +24,30 @@ class KNN:
         for index,x_train in enumerate(self.X_train):
             dist = self.euclidean_dist(x,x_train)
             nearest_neighbours_dist.append((dist,index))
-        sorted_nearest_neighbours = sorted(nearest_neighbours_dist)                      
+        sorted_nearest_neighbours = sorted(nearest_neighbours_dist)          
+        k = self.k            
         if self.classification:
             tie = True
-            k = self.k
             while tie:
                 k_nearest_neighbours = sorted_nearest_neighbours[:k]
                 k_nearest_neighbours_labels = [self.Y_train[i[1]] for i in k_nearest_neighbours]
                 
-                # try:
-                prediction  = int(statistics.mode(k_nearest_neighbours_labels))
-                # return prediction
-                # except:
-                #     k = k-1
-                #     print("Tie in classification found : Trying for k = %s " %(k))             
-                # 
+                try:
+                    prediction  = int(statistics.mode(k_nearest_neighbours_labels))
+                    return prediction
+                except:
+                    k = k-1
+                    print("Tie in classification found : Trying for k = %s " %(k))             
+                
                 tie = False
             return prediction     
 
         elif self.regression:
-            #to be coded
-            pass
+            prediction = 0
+            k_nearest_neighbours = sorted_nearest_neighbours[:k]
+            prediction = sum(k_nearest_neighbours)/k
+            return prediction
+
 
 
 
