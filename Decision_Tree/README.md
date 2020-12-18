@@ -2,10 +2,10 @@
 - # Decision Trees
 
 This Decision tree classifier has been implemented for binary classification of data.
-General coment on decision trees
-Disadvantage
+# General coment on decision trees
+# Disadvantage
 - overfitting
-Advantages
+# Advantages
 -A significant advantage of a decision tree is that it forces the consideration of all possible outcomes of a decision and traces each path to a conclusion. It creates a comprehensive analysis of the consequences along each branch and identifies decision nodes that need further analysis.
 (The data set which is used here is for heart disease prediction and even after quite a lot of tweaking it gives accuracy upto 50-52% only )
 ## Usage
