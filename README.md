@@ -2,4 +2,5 @@
 - # SVM using stochastic gradient descent
 - # K- nearest neighbours
 - # Decision Trees
+- # Expectation Maximization Algorithm
 
