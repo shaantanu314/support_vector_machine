@@ -1,10 +1,10 @@
 # Machine Learning algorithms from scratch
 - # Expectation Maximization Algorithm
-The Expectation-Maximization (EM) algorithm is a way to find maximum-likelihood estimates for model parameters when your data is incomplete, has missing data points, or has unobserved (hidden) latent variables. It is an iterative way to approximate the maximum likelihood function.
+###  The Expectation-Maximization (EM) algorithm is a way to find maximum-likelihood estimates for model parameters when your data is incomplete, has missing data points, or has unobserved (hidden) latent variables. It is an iterative way to approximate the maximum likelihood function.
 
 # some outputs of the mixture of gaussian for random inputs
-![Alt text](./Figure_1.png "Title")
-![Alt text](./Figure_2.png "Title")
+![Alt text](./Figures/Figure_1.png "Title")
+![Alt text](./Figures/Figure_2.png "Title")
 
 # Intuition about EM algorithm from my notes
 [LINK TO NOTES](https://smallpdf.com/shared#st=80586d00-97ea-4ece-9b0d-11500a58267a&fn=New+doc+27-Dec-2020+10.30+PM.pdf&ct=1609088550700&tl=share-document&rf=link)
