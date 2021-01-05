@@ -2,6 +2,7 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+from sklearn.decomposition import FastICA
 from sklearn import preprocessing
 
 img1 = Image.open('./img1.jpeg')
@@ -17,7 +18,6 @@ x2 = x2.reshape(-1)
 # shape is (180,240,3)
 # remember for reshaping 
 
-
 # img = Image.fromarray(x1,'RGB')
 # img.show()
 # img = Image.fromarray(x2,'RGB')
@@ -26,7 +26,7 @@ x2 = x2.reshape(-1)
 X = [x1 , x2]
 X = np.array(X)
 
-A = [[1,0],[0,1]]
+A = [[0.8,0.2],[0.3,0.7]]
 print A
 X = np.dot(A,X)
 X = np.array(X)
@@ -91,8 +91,14 @@ S2[:,:,1] = S2[:,:,1]/mx*255
 S2[:,:,2] = S1[:,:,2]/mx*255
 
 
-print S2
+
+# img = Image.fromarray((S1.reshape(180,240,3)).astype('uint8'),'RGB')
+# img.show()
 
 
-img = Image.fromarray((S1.reshape(180,240,3)).astype('uint8'),'RGB')
+ica = FastICA(n_components=2)
+S = np.matmul(ica.fit_transform(X),X)
+
+
+img = Image.fromarray((S[0].reshape(180,240,3)).astype('uint8'),'RGB')
 img.show()
