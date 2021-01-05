@@ -8,16 +8,19 @@ import math
 n_samples = 2000
 time = np.linspace(0,8,n_samples)
 alpha = 0.1
-
+h = np.zeros(4000)
 def center(X):
     X = np.array(X)
     mean = X.mean(axis=0, keepdims=True)
     return X- mean
 
 def whitening(X):
-    cov = np.cov(X)
+    # cov = np.cov(X)
+    cov = np.matmul(X,X.T)
     d, E = np.linalg.eigh(cov)
+
     D = np.diag(d)
+    print(d)
     D_inv = np.sqrt(np.linalg.inv(D))
     X_whiten = np.dot(E, np.dot(D_inv, np.dot(E.T, X)))
     return X_whiten
@@ -42,14 +45,17 @@ def log_likelihood(X,W):
     
     return value
 
-def new_w(X,W):
-    A = np.zeros((X.shape[1],1))
+def new_w(X,W,iter):
+    A = np.zeros((X.shape[0],1))
     new_W = W
-    for j in range(X.shape[0]):
-        for i in range(X.shape[1]):
-            A[i] = 1 - 2*g(np.dot(W[i],X[j].T))
-        new_W = new_W + alpha*((A*X[j]) + np.linalg.inv(new_W.T))
-
+    N = X.shape[1]
+    # for j in range(X.shape[1]):
+    #     for i in range(X.shape[0]):
+    #         A[i] = 1 - 2/N*g(np.dot(W[i],X.T[j].T))
+        
+    #     new_W = new_W + alpha*((A*X.T[j]) + np.linalg.inv(new_W.T))
+    h[iter] =  1/N*sum(sum(g(np.matmul(X.T,W)))) +0.5*np.log(np.linalg.det(W))
+    new_W = W + alpha*(np.linalg.inv(W.T) -2/N*np.matmul(X,g(np.matmul(X.T,W)))  )
     return new_W
 
 
@@ -59,39 +65,62 @@ s3 = signal.sawtooth(2 * np.pi * time)
 
 X = np.c_[s1,s2,s3]
 
-X = np.array(X)
-print X.shape
-plt.figure()
-for i in range(X.shape[1]):
-    plt.plot(X.T[i])
-plt.show()
+# A = np.array(([[1, 0.5], [0.5, 2]]))
+
+# a = np.random.laplace(size=(1,500))
+# b = np.random.laplace(size=(1,500))
+# X = np.c_[a.T , b.T]
+# X = X.T
+# print X.shape
+# X = np.dot(A,X)
+# plt.figure()
+# plt.scatter(X[0],X[1])
+# plt.show()
+
+# plt.figure()
+# for i in range(X.shape[1]):
+#     plt.plot(X.T[i])
+# plt.show()
 
 
-A = np.array(([[1, 5, 1], [0.5, 2, 1.0], [1.5, 1.0, 2.0]]))
+A = np.array(([[0.8, 0.1, 0.1], [0.1, 0.6, 0.3], [0.15, 0.05, 0.9]]))
 
-# X = center(X)
 
 
 X = np.dot(X,A.T)
-
-
-# X = whitening(X)
-print(X.shape)
+X = X.T
 plt.figure()
-for i in range(X.shape[1]):
-    plt.plot(X.T[i])
+for i in range(X.shape[0]):
+    plt.plot(X[i])
 plt.show()
+
+print(X.shape)
+X = center(X)
+# X = whitening(X)
+
+
+# plt.figure()
+# for i in range(X.shape[0]):
+#     plt.plot(X[i])
+# plt.show()
 
 W = np.random.rand(3,3)
 
-for i in range(200):
-    print(i)
-    W = new_w(X,W)
+for i in range(4000):
+    W = new_w(X,W,i)
 print W
 # print log_likelihood(X,W)
 
-S = np.dot(X,W)
-S = S.T
+plt.figure()
+plt.plot(h)
+plt.show()
+
+
+print "done"
+print X.shape
+print W.shape
+S = np.dot(W,X)
+
 
 plt.figure()
 for i in range(S.shape[0]):
@@ -100,11 +129,12 @@ plt.show()
 
 
 
-# USING FastICA from sklearn
-ica = FastICA(n_components=3)
-S = ica.fit_transform(X)
+# # USING FastICA from sklearn
+# ica = FastICA(n_components=3)
+# S = ica.fit_transform(X.T)
 
-plt.figure()
-for i in range(S.shape[1]):
-    plt.plot(S.T[i])
-plt.show()
+# print S.shape
+# plt.figure()
+# for i in range(S.shape[1]):
+#     plt.plot(S.T[i])
+# plt.show()
