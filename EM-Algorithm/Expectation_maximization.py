@@ -1,7 +1,7 @@
 import numpy as np
 import math
 import matplotlib.pyplot as plt
-
+from scipy import interpolate
 
 class EM_Model:
 
@@ -115,12 +115,17 @@ class EM_Model:
                 #print("ok")
                 z[j] = z[j] + self.Gaussian(test,self.mean[i],self.covariance_matrix[i])
         z = z.reshape(199,199)
-        X = np.linspace(1,100,199);
-        Y = np.linspace(1,100,199);
-        X,Y = np.meshgrid(X,Y);
-        
+        # X = np.linspace(1,100,199);
+        # Y = np.linspace(1,100,199);
+        X, Y = np.mgrid[0:1:199j, 0:1:199j]
+   
+        print self.covariance_matrix
         plt.figure()
-        plt.contourf(X,Y,z);
+        plt.contourf(X,Y, z)
         plt.show()
+        # print X
+        # plt.figure()
+        # plt.contourf(X,Y,z);
+        # plt.show()
 
 

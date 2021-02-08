@@ -2,8 +2,8 @@ import numpy as np
 import Expectation_maximization as EM
 import matplotlib.pyplot as plt
 
-X = [ [np.random.rand()*10+10,np.random.rand()*50+10] for i in range(500)]
-Y = [[np.random.rand()*50+10,np.random.rand()*10+10] for i in range(150)] 
+X = [ [np.random.normal()*20+10,np.random.normal()*20+30] for i in range(100)]
+Y = [[np.random.normal()*10+70,np.random.normal()*10+90] for i in range(100)] 
 # Z = [[np.random.rand()*10+30,np.random.rand()*10*10] for i in range(20)] 
 X = np.array(X)
 Y = np.array(Y)
