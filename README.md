@@ -4,5 +4,5 @@
 - # Decision Trees
 - # Expectation Maximization Algorithm
 - # Time Series Algorithms
-  - ## Dynamic Time Warping
-  - ## DTW Barycenter Averaging
+  - ### Dynamic Time Warping
+  - ### DTW Barycenter Averaging
